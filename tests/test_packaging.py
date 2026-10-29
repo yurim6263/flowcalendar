@@ -93,3 +93,10 @@ def test_public_repository_files_exist_and_readme_images_resolve():
         assert (ROOT / image).exists(), image
     assert "ui_design/" in read(".gitignore")  # 디자인 시안은 저장소에 올리지 않는다
     assert (ROOT / "docs" / "images" / "main.png").stat().st_size < 2 * 1024 * 1024  # 이미지가 너무 크지 않게
+
+
+def test_gitignore_blocks_recovery_codes_and_key_files():
+    rules = read(".gitignore")
+    for pattern in ("*recovery-codes*", ".env", "*.pem", "*.key"):
+        assert pattern in rules
+    assert "secrets.*" not in rules  # 앱의 services/secrets.py 까지 무시하지 않게 이름 패턴은 쓰지 않는다

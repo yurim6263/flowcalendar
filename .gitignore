@@ -10,3 +10,12 @@ desktop.ini
 
 # 디자인 시안 이미지는 저장소에 넣지 않는다 (내 컴퓨터에만 둔다)
 ui_design/
+
+# 실수로 올라가면 안 되는 비밀 파일 (복구 코드, 키, 환경 변수 파일 등)
+*recovery-codes*
+*recovery_codes*
+.env
+.env.*
+*.pem
+*.key
+*.pfx

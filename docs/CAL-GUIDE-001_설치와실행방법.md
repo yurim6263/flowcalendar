@@ -137,7 +137,7 @@ AI는 **키를 넣어야만** 화면에 나타납니다. 키가 없어도 나머
 
 ## 8. (개발자) GitHub
 
-저장소: https://github.com/yurim6263/flowcalendar (**현재 Private**). 디자인 시안 폴더(`ui_design`)와 빌드 결과(`dist`, `build`), 가상환경(`.venv`)은 `.gitignore`로 제외되어 올라가지 않습니다.
+저장소: https://github.com/yurim6263/flowcalendar (**Public**, 2026-10-29 공개). 디자인 시안 폴더(`ui_design`)와 빌드 결과(`dist`, `build`), 가상환경(`.venv`)은 `.gitignore`로 제외되어 올라가지 않습니다.
 커밋 작성자는 이 저장소에만 GitHub noreply 주소(`ID+yurim6263@users.noreply.github.com`)로 설정되어 있어, 공개해도 개인 이메일이 기록에 보이지 않습니다.
 
 ### 8.1 평소에 변경을 올리기
@@ -155,12 +155,12 @@ git push
 2. 커밋하고 푸시합니다.
 3. 릴리스를 만들어 설치 파일을 첨부합니다.
    ```powershell
-   gh release create v1.1.0 dist\FlowCalendar-Setup-1.1.0.exe --title "Flow Calendar v1.1.0" --notes "변경 내용"
+   gh release create v1.1.0 dist\FlowCalendar-Setup-1.1.0.exe --title "Flow Calendar v1.1.0" --notes "변경 내용과 SHA256"
    ```
    (웹에서는 저장소 → **Releases → Draft a new release**에 태그를 입력하고 설치 파일을 끌어다 놓은 뒤 Publish)
 4. 설치 파일은 저장소에 커밋하지 않고 **Releases에만** 올립니다.
 
-> Private 저장소의 Releases는 초대된 사람만 내려받을 수 있습니다. 다른 사람이 받게 하려면 Public으로 바꾸거나 그 사람을 초대하세요.
+> Public 저장소의 Releases는 누구나(로그인 없이) 내려받을 수 있습니다. 릴리스 설명에 설치 파일의 SHA256 값(`Get-FileHash`로 구함)을 같이 적습니다.
 
 ### 8.3 Public(공개)으로 바꾸기 전 점검
 
@@ -169,14 +169,15 @@ git push
 - [x] README에 화면 캡처와 설명이 있다 (캡처는 데모 데이터)
 - [x] 커밋 이메일이 noreply 주소다
 - [x] 비밀키·토큰 패턴 검색에서 발견된 것이 없다
-- [ ] **개인 정보 최종 확인**: 정의서의 작성자 이름(`이유림`)과 LICENSE의 이름을 공개해도 괜찮은지
-- [ ] **커밋 기록 확인**: `git log -p`로 훑어서 비밀·개인 정보가 한 번이라도 들어간 적이 없는지(Public이 되면 과거 기록도 모두 보입니다)
-- [ ] GitHub 저장소 **Settings → General → Features**에서 Issues 사용 여부 정하기
-- [ ] (선택) 저장소 About에 설명, 웹사이트, Topics 확인
+- [x] **개인 정보 최종 확인**: 정의서의 작성자 이름(`이유림`)과 LICENSE의 이름 공개 — 본인이 공개해도 된다고 확인함
+- [x] **커밋 기록 확인**: 모든 커밋에서 키·토큰·개인 이메일·내 PC 경로 패턴을 검색했고 발견된 것이 없음(Public이 되면 과거 기록도 모두 보입니다)
+- [x] Issues는 켜 두고, Wiki·Projects는 껐다
+- [x] 저장소 About 설명과 Topics 설정
 
 ### 8.4 공개로 전환하는 방법
 
 1. 저장소 → **Settings → 맨 아래 Danger Zone → Change repository visibility → Make public**
+   (2026-10-29에 공개로 전환했다. 아래는 다시 바꿀 때 참고)
 2. 확인 창에서 저장소 이름을 입력합니다.
 3. 전환 후 로그아웃한 브라우저(시크릿 창)에서 저장소 주소와 Releases 링크가 열리는지 확인합니다.
 4. 되돌리려면 같은 곳에서 Make private (이미 공개된 동안 복제·저장된 것은 되돌릴 수 없습니다).

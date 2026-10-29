@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.venv/
+build/
+dist/
+*.egg-info/
+.pytest_cache/
+.playwright-mcp/
+desktop.ini
+
+# 디자인 시안 이미지는 저장소에 넣지 않는다 (내 컴퓨터에만 둔다)
+ui_design/

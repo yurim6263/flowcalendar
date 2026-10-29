@@ -1,0 +1,4 @@
+# 줄바꿈은 저장소 안에서 LF 로 맞추고, 이미지·아이콘은 건드리지 않는다
+* text=auto
+*.png binary
+*.ico binary

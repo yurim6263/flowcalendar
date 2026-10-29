@@ -135,28 +135,48 @@ AI는 **키를 넣어야만** 화면에 나타납니다. 키가 없어도 나머
 
 ---
 
-## 8. (개발자) GitHub에 올리기
+## 8. (개발자) GitHub
 
-현재 이 폴더는 **로컬 git 저장소**이고 GitHub와는 연결되어 있지 않습니다. 디자인 시안 폴더(`ui_design`)와 빌드 결과(`dist`, `build`), 가상환경(`.venv`)은 `.gitignore`로 제외되어 올라가지 않습니다.
+저장소: https://github.com/yurim6263/flowcalendar (**현재 Private**). 디자인 시안 폴더(`ui_design`)와 빌드 결과(`dist`, `build`), 가상환경(`.venv`)은 `.gitignore`로 제외되어 올라가지 않습니다.
+커밋 작성자는 이 저장소에만 GitHub noreply 주소(`ID+yurim6263@users.noreply.github.com`)로 설정되어 있어, 공개해도 개인 이메일이 기록에 보이지 않습니다.
 
-1. **GitHub에 빈 저장소 만들기** (둘 중 하나)
-   - 웹: github.com → 오른쪽 위 **+ → New repository** → 이름 `flowcalendar`(예시), **Private/Public 선택**, README·.gitignore·license는 **추가하지 않기**(이미 폴더에 있음) → Create.
-   - 또는 터미널(GitHub CLI `gh`에 로그인되어 있을 때): `gh repo create flowcalendar --private --source . --remote origin`
-2. **첫 커밋**을 만듭니다.
+### 8.1 평소에 변경을 올리기
+
+```powershell
+git status                      # 올라갈 파일 확인 (키·비밀번호가 없는지 훑어보기)
+git add .
+git commit -m "변경 내용 설명"
+git push
+```
+
+### 8.2 새 버전을 배포하기 (Releases)
+
+1. 버전을 올립니다(7장 7번의 4곳) → 테스트 → `powershell -File packaging\build.ps1`
+2. 커밋하고 푸시합니다.
+3. 릴리스를 만들어 설치 파일을 첨부합니다.
    ```powershell
-   git add .
-   git status            # 올라갈 파일 목록 확인 (키·비밀번호가 없는지 훑어보기)
-   git commit -m "Flow Calendar v1.0.0"
+   gh release create v1.1.0 dist\FlowCalendar-Setup-1.1.0.exe --title "Flow Calendar v1.1.0" --notes "변경 내용"
    ```
-3. **연결하고 올리기** (1번에서 웹으로 만들었다면)
-   ```powershell
-   git remote add origin https://github.com/내아이디/flowcalendar.git
-   git push -u origin main
-   ```
-   처음 푸시할 때 로그인 창이 뜨면 GitHub 계정으로 로그인합니다.
-4. **설치 파일 배포(선택)**: 설치 파일은 저장소에 올리지 않고 **Releases**에 올립니다.
-   - GitHub 저장소 → **Releases → Draft a new release** → 태그 `v1.0.0` → `dist\FlowCalendar-Setup-1.0.0.exe`를 끌어다 놓고 → Publish.
-   - 또는: `gh release create v1.0.0 dist\FlowCalendar-Setup-1.0.0.exe --title "Flow Calendar v1.0.0" --notes "첫 배포"`
-5. 이후 변경은 `git add .` → `git commit -m "설명"` → `git push`로 올립니다.
+   (웹에서는 저장소 → **Releases → Draft a new release**에 태그를 입력하고 설치 파일을 끌어다 놓은 뒤 Publish)
+4. 설치 파일은 저장소에 커밋하지 않고 **Releases에만** 올립니다.
 
-> **주의**: 올리기 전에 `git status`로 목록을 꼭 확인하세요. API 키가 들어간 파일은 올리면 안 됩니다. 이 프로젝트는 키를 파일에 저장하지 않지만, 이미 올라간 비밀 정보는 지워도 기록에 남습니다. Public 저장소로 만들면 누구나 소스를 볼 수 있습니다.
+> Private 저장소의 Releases는 초대된 사람만 내려받을 수 있습니다. 다른 사람이 받게 하려면 Public으로 바꾸거나 그 사람을 초대하세요.
+
+### 8.3 Public(공개)으로 바꾸기 전 점검
+
+- [x] `LICENSE`(MIT) 파일이 있다 — **MIT는 누구나 쓰고 고치고 팔 수 있는 라이선스입니다. 다른 조건을 원하면 공개 전에 바꾸세요.**
+- [x] 사용한 오픈소스 고지(`THIRD_PARTY_NOTICES.md`)가 있다
+- [x] README에 화면 캡처와 설명이 있다 (캡처는 데모 데이터)
+- [x] 커밋 이메일이 noreply 주소다
+- [x] 비밀키·토큰 패턴 검색에서 발견된 것이 없다
+- [ ] **개인 정보 최종 확인**: 정의서의 작성자 이름(`이유림`)과 LICENSE의 이름을 공개해도 괜찮은지
+- [ ] **커밋 기록 확인**: `git log -p`로 훑어서 비밀·개인 정보가 한 번이라도 들어간 적이 없는지(Public이 되면 과거 기록도 모두 보입니다)
+- [ ] GitHub 저장소 **Settings → General → Features**에서 Issues 사용 여부 정하기
+- [ ] (선택) 저장소 About에 설명, 웹사이트, Topics 확인
+
+### 8.4 공개로 전환하는 방법
+
+1. 저장소 → **Settings → 맨 아래 Danger Zone → Change repository visibility → Make public**
+2. 확인 창에서 저장소 이름을 입력합니다.
+3. 전환 후 로그아웃한 브라우저(시크릿 창)에서 저장소 주소와 Releases 링크가 열리는지 확인합니다.
+4. 되돌리려면 같은 곳에서 Make private (이미 공개된 동안 복제·저장된 것은 되돌릴 수 없습니다).

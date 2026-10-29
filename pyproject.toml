@@ -5,6 +5,10 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "flowcalendar"
 version = "1.0.0"
+description = "Flow Calendar: local-first Windows desktop calendar (schedule, to-do, memo, optional AI)"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [{name = "yurim6263"}]
 requires-python = ">=3.12"
 dependencies = ["PySide6-Essentials>=6.7", "keyring>=25.0"]
 

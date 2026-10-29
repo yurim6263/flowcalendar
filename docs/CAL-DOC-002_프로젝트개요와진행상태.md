@@ -27,7 +27,7 @@
 **남은 일**
 - 실사용 점검: [CAL-CHECK-001](CAL-CHECK-001_실사용점검표.md)의 항목을 실제 컴퓨터에서 확인 (알림, 위젯, 재부팅, 끌어서 옮기기, 실제 AI 등)
 - 깨끗한 Windows에서 설치 시험
-- GitHub 저장소 연결 ([CAL-GUIDE-001](CAL-GUIDE-001_설치와실행방법.md) 8장)
+- 저장소를 Public으로 전환 (지금은 **Private**, 공개 전 점검표: [CAL-GUIDE-001](CAL-GUIDE-001_설치와실행방법.md) 8.3)
 
 ## 3. 기술 스택
 
@@ -37,7 +37,8 @@
 | 데이터 | SQLite 파일 하나 (`%APPDATA%\FlowCalendar\flowcalendar.db`), 스키마 버전 3, 변경은 마이그레이션 항목 추가 방식 |
 | 키 저장 | keyring → Windows 자격 증명 관리자 |
 | AI | Gemini / Claude / OpenAI 어댑터(표준 라이브러리 `urllib`, 추가 패키지 없음), 내 API 키(BYOK) |
-| 배포 | PyInstaller(one-folder) + Inno Setup 6 설치 파일, 코드 서명 없음 |
+| 배포 | PyInstaller(one-folder) + Inno Setup 6 설치 파일(GitHub Releases), 코드 서명 없음 |
+| 저장소 | GitHub `yurim6263/flowcalendar` (Private → 이력서용으로 공개 예정), 라이선스 MIT, 커밋 이메일은 noreply 주소 |
 | 테스트 | pytest (실제 AI·실제 키 저장소 호출 없음) |
 | 서버 / 계정 | **없음** (Flutter, FastAPI, PostgreSQL, Firebase는 쓰지 않는다) |
 
@@ -73,7 +74,8 @@
 
 | 문서 | 내용 |
 | --- | --- |
-| `README.md` | 소개, 설치, 개발 방법 요약 |
+| `README.md` | 소개, 화면 캡처, 설치, 개발 방법 요약 |
+| `LICENSE`, `THIRD_PARTY_NOTICES.md` | MIT 라이선스, 사용한 오픈소스 고지 |
 | `docs/CAL-DOC-001_Ver1.0_정의서.md` | **기준 문서**: 요구사항, 데이터 모델, 결정 기록 |
 | `docs/CAL-DOC-002_프로젝트개요와진행상태.md` | 이 문서: 개요, 진행 상태, 기술 스택, 이후 계획 |
 | `docs/CAL-GUIDE-001_설치와실행방법.md` | 설치·설정·업데이트·제거·백업, 빌드와 GitHub 올리기 순서 |
@@ -96,4 +98,4 @@
 
 | 버전 | 날짜 | 내용 |
 | --- | --- | --- |
-| v1.0.0 | 2026-10-29 | 첫 배포. M1~M5 기능, 설치 파일(`FlowCalendar-Setup-1.0.0.exe`), 성능 측정(켜기 약 1.1초, 월 이동 약 61ms) |
+| v1.0.0 | 2026-10-29 | 첫 배포(GitHub Releases, Private 저장소). 공개 전환 준비: LICENSE(MIT), 오픈소스 고지, README 화면 캡처. M1~M5 기능, 설치 파일(`FlowCalendar-Setup-1.0.0.exe`), 성능 측정(켜기 약 1.1초, 월 이동 약 61ms) |

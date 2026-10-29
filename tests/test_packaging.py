@@ -80,3 +80,16 @@ def test_data_dir_override_is_used_for_database_path(monkeypatch, tmp_path):
     assert db.default_db_path() == tmp_path / db.DB_FILE_NAME
     monkeypatch.delenv(db.DATA_DIR_ENV)
     assert db.default_db_path().name == db.DB_FILE_NAME and tmp_path not in db.default_db_path().parents
+
+
+def test_public_repository_files_exist_and_readme_images_resolve():
+    for name in ("LICENSE", "THIRD_PARTY_NOTICES.md", "README.md", ".gitignore"):
+        assert (ROOT / name).exists(), name
+    assert "MIT License" in read("LICENSE")
+    readme = read("README.md")
+    images = re.findall(r'(?:!\[[^\]]*\]\(|src=")(docs/images/[^)"]+|assets/[^)"]+)', readme)
+    assert images, "README 에 화면 캡처가 없다"
+    for image in images:
+        assert (ROOT / image).exists(), image
+    assert "ui_design/" in read(".gitignore")  # 디자인 시안은 저장소에 올리지 않는다
+    assert (ROOT / "docs" / "images" / "main.png").stat().st_size < 2 * 1024 * 1024  # 이미지가 너무 크지 않게

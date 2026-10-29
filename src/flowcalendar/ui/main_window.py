@@ -182,6 +182,8 @@ class MainWindow(QMainWindow):
         root = BackdropWidget()
         root.setLayout(body)
         self.setCentralWidget(root)
+        root.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
+        root.setFocus()  # 처음 켰을 때 맨 앞 버튼(이전 달)에 포커스 표시가 붙지 않게 한다. Tab 을 누르면 그때부터 버튼으로 옮겨 간다
         self.size_grip = QSizeGrip(root)  # 테두리 없는 위젯 모드에서 크기를 바꾸는 손잡이
         self.size_grip.hide()
         self._apply_opacity()  # 새 창은 항상 일반 모드로 시작하므로 팝업 투명도도 불투명으로 맞춘다

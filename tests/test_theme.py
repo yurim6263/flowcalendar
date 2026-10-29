@@ -323,3 +323,13 @@ def test_calendar_chips_and_cell_buttons_are_skipped_by_tab(qapp):
     cell = next(c for c in e.window.grid._cells if c.day == date(2026, 10, 27) and not c.isHidden())
     assert all(c.focusPolicy().name == "NoFocus" for c in cell._chips if c is not None)
     assert cell.plus.focusPolicy().name == "NoFocus" and cell.more.focusPolicy().name == "NoFocus"
+
+
+def test_first_button_does_not_show_focus_ring_at_startup(qapp):
+    from tests.test_ai_auto import make_env
+
+    w = make_env().window
+    w.show()
+    w.activateWindow()
+    qapp.processEvents()
+    assert not w.prev_btn.hasFocus()  # 처음부터 이전 달 버튼에 포커스 표시가 붙어 있지 않다
